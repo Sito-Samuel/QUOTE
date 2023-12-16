@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "149436710909",
+    "project_id": "project-8a106",
+    "storage_bucket": "project-8a106.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149436710909:android:68f58a04915e642d992394",
+        "android_client_info": {
+          "package_name": "com.sito.quotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt7S3sNw6iG1m3GmijIf9azej5UBnPP7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

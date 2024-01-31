@@ -1,5 +1,4 @@
 import 'package:quotes/register/onboard.dart';
-import 'package:quotes/register/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart'; // Import the Firebase Core package
 import 'package:flutter/material.dart';
 

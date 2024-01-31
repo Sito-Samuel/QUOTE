@@ -127,17 +127,7 @@ class _SignUpPageState extends State<SignUpPage> {
                            return null;
                          },
                        ),
-                       CustomTextField(
-                         label: 'Address',
-                         hint: 'Enter your address',
-                         controller: _addressController,
-                         validator: (value) {
-                           if (value?.isEmpty ?? true) {
-                             return 'Please enter your address';
-                           }
-                           return null;
-                         },
-                       ),
+
                        CustomTextField(
                          label: 'Email',
                          hint: 'Enter your email',

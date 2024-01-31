@@ -2,7 +2,8 @@ import 'package:quotes/register/onboard.dart';
 import 'package:flutter/material.dart';
 import 'package:quotes/auth_service.dart';
 import 'package:quotes/customTextField.dart';
-import 'package:quotes/home/home.dart';
+import '../home/homepage.dart';
+
 
 class SignInPage extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _SignInPageState extends State<SignInPage> {
       // Navigate to the home page
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => Home()),
       );
     } else {
       print('User sign-in failed');
@@ -43,115 +44,141 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFF7BA7ED),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      onPressed: () {
-                        // Navigate back to the Onboard screen
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => OnBoard()),
-                        );
-                      },
-                    ),
-                  ),
-                  Text(
-                    'Sign In',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Colors.white,
-                      fontFamily: 'DancingScript',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  CustomTextField(
-                    label: 'Email',
-                    hint: 'Enter your email',
-                    controller: _emailController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Email is required';
-                      }
+        backgroundColor: Colors.grey.shade600,
+        // resizeToAvoidBottomInset: false,
 
-                      if (!value.contains('@')) {
-                        return 'Enter a valid email address';
-                      }
-                      return null;
-                    },
-                  ),
-                  CustomTextField(
-                    label: 'Password',
-                    hint: 'Enter your password',
-                    controller: _passwordController,
-                    validator: (value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
-                    isPassword: true,
-                    showPassword: _showPassword,
-                    onToggleShowPassword: () {
-                      setState(() {
-                        _showPassword = !_showPassword;
-                      });
-                    },
-                  ),
-                  SizedBox(height: 30),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: _signInUser,
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                      ),
-                      child: Text(
-                        'Sign In',
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                // Navigate back to the Onboard screen
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => OnBoard()),
+                );
+              },
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Card(
+                elevation: 16,
+                color: Colors.black,
+                child: Container(
+                  color: Colors.transparent,
+                  height: MediaQuery.of(context).size.height / 7,
+                  width: MediaQuery.of(context).size.width / 3.5,
+                  child: Image.asset("assets/dailyquotes.png"),
+                ),
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/sign_in_background.png'),
+                      fit: BoxFit.fill),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Log In',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
                           fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontFamily: 'DancingScript',
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text("Don't have an account? "),
-                      InkWell(
-                        onTap: () {
-                          // Navigate to the sign-up page
-                          Navigator.pop(context);
+                      CustomTextField(
+                        label: 'Email',
+                        hint: 'Enter your email',
+                        controller: _emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Email is required';
+                          }
+
+                          if (!value.contains('@')) {
+                            return 'Enter a valid email address';
+                          }
+                          return null;
                         },
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                      ),
+                      CustomTextField(
+                        label: 'Password',
+                        hint: 'Enter your password',
+                        controller: _passwordController,
+                        validator: (value) {
+                          if (value?.isEmpty ?? true) {
+                            return 'Please enter your password';
+                          }
+                          return null;
+                        },
+                        isPassword: true,
+                        showPassword: _showPassword,
+                        onToggleShowPassword: () {
+                          setState(() {
+                            _showPassword = !_showPassword;
+                          });
+                        },
+                      ),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: _signInUser,
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                          ),
+                          child: Text(
+                            'Log In',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Don't have an account? ",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              // Navigate to the sign-up page
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
+            )
+          ],
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:quotes/register/onboard.dart';
 import 'package:quotes/register/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart'; // Import the Firebase Core package
 import 'package:flutter/material.dart';
@@ -12,7 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: OnBoard(),
     );
   }
 }

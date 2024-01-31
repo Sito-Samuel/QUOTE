@@ -33,14 +33,15 @@ class CustomTextField extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
+              border: Border.all(color: Colors.white),
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: TextFormField(
+              style: TextStyle(color: Colors.white),
               keyboardType: inputType,
               inputFormatters: inputType == TextInputType.phone
                   ? [FilteringTextInputFormatter.digitsOnly]
@@ -53,7 +54,7 @@ class CustomTextField extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hint,
                 hintStyle: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 suffixIcon: isPassword
                     ? IconButton(

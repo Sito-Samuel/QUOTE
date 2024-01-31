@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFF7BA7ED),
+        backgroundColor: Colors.grey.shade600,
         body: Padding(
           padding: const EdgeInsets.fromLTRB(8.0, 90, 8.0, 0),
           child: SingleChildScrollView(
@@ -64,8 +64,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   Align(
-                    alignment: Alignment.topLeft,
+                    alignment: Alignment.topCenter,
                     child: IconButton(
                       icon: Icon(Icons.arrow_back),
                       onPressed: () {
@@ -77,141 +78,173 @@ class _SignUpPageState extends State<SignUpPage> {
                       },
                     ),
                   ),
-                  Center(
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontFamily: 'DancingScript',
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Card(
+                      elevation: 16,
+                      color: Colors.black,
+                      child: Container(
+                        color: Colors.transparent,
+                        height: MediaQuery.of(context).size.height / 7,
+                        width: MediaQuery.of(context).size.width / 3.5,
+                        child: Image.asset("assets/dailyquotes.png"),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  CustomTextField(
-                    label: 'Full Name',
-                    hint: 'Enter your full name',
-                    controller: _fullNameController,
-                    validator: (value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Please enter your full name';
-                      }
-                      return null;
-                    },
-                  ),
-                  CustomTextField(
-                    label: 'Address',
-                    hint: 'Enter your address',
-                    controller: _addressController,
-                    validator: (value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Please enter your address';
-                      }
-                      return null;
-                    },
-                  ),
-                  CustomTextField(
-                    label: 'Email',
-                    hint: 'Enter your email',
-                    controller: _emailController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Email is required';
-                      }
+                 Container(
+                   padding: const EdgeInsets.only(top: 60),
+                   decoration: BoxDecoration(
+                     image: DecorationImage(
+                         image: AssetImage('assets/sign_in_background.png'),
+                         fit: BoxFit.fill),
+                   ),
+                   child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.center,
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     children: [
+                       Center(
+                         child: Text(
+                           'Sign Up',
+                           style: TextStyle(
+                             fontWeight: FontWeight.bold,
+                             fontSize: 24,
+                             color: Colors.white,
+                             fontFamily: 'DancingScript',
+                           ),
+                         ),
+                       ),
+                       SizedBox(
+                         height: 40,
+                       ),
+                       CustomTextField(
+                         label: 'Full Name',
+                         hint: 'Enter your full name',
+                         controller: _fullNameController,
+                         validator: (value) {
+                           if (value?.isEmpty ?? true) {
+                             return 'Please enter your full name';
+                           }
+                           return null;
+                         },
+                       ),
+                       CustomTextField(
+                         label: 'Address',
+                         hint: 'Enter your address',
+                         controller: _addressController,
+                         validator: (value) {
+                           if (value?.isEmpty ?? true) {
+                             return 'Please enter your address';
+                           }
+                           return null;
+                         },
+                       ),
+                       CustomTextField(
+                         label: 'Email',
+                         hint: 'Enter your email',
+                         controller: _emailController,
+                         validator: (value) {
+                           if (value == null || value.isEmpty) {
+                             return 'Email is required';
+                           }
 
-                      if (!value.contains('@')) {
-                        return 'Enter a valid email address';
-                      }
-                      return null;
-                    },
-                  ),
-                  CustomTextField(
-                    label: 'Phone Number',
-                    hint: 'Enter your phone number',
-                    inputType: TextInputType.phone,
-                    controller: _phoneNumberController,
-                    validator: (value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Please enter your phone number';
-                      }
-                      if (!RegExp(r'^[0-9]+$').hasMatch(value!)) {
-                        return 'Please enter a valid phone number containing only digits';
-                      }
-                      if (value.length != 11) {
-                        return 'Phone number must have exactly 11 digits';
-                      }
-                      return null;
-                    },
-                  ),
-                  CustomTextField(
-                    label: 'Password',
-                    hint: 'Enter your password',
-                    controller: _passwordController,
-                    validator: (value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Please enter a password';
-                      }
-                      if (!RegExp(
-                              r'^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}|":;<>,.?/~`]).{8,}$')
-                          .hasMatch(value!)) {
-                        return 'Password must have at least 8 characters, an uppercase letter, a digit, and a special character';
-                      }
-                      return null;
-                    },
-                    isPassword: true,
-                    showPassword: _showPassword,
-                    onToggleShowPassword: () {
-                      setState(() {
-                        _showPassword = !_showPassword;
-                      });
-                    },
-                  ),
-                  SizedBox(height: 30),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: _registerUser,
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                      ),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text("Already have an account? "),
-                      InkWell(
-                        onTap: () {
-                          // Navigate to the sign-in page
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignInPage(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "Sign In",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                           if (!value.contains('@')) {
+                             return 'Enter a valid email address';
+                           }
+                           return null;
+                         },
+                       ),
+                       CustomTextField(
+                         label: 'Phone Number',
+                         hint: 'Enter your phone number',
+                         inputType: TextInputType.phone,
+                         controller: _phoneNumberController,
+                         validator: (value) {
+                           if (value?.isEmpty ?? true) {
+                             return 'Please enter your phone number';
+                           }
+                           if (!RegExp(r'^[0-9]+$').hasMatch(value!)) {
+                             return 'Please enter a valid phone number containing only digits';
+                           }
+                           if (value.length != 11) {
+                             return 'Phone number must have exactly 11 digits';
+                           }
+                           return null;
+                         },
+                       ),
+                       CustomTextField(
+                         label: 'Password',
+                         hint: 'Enter your password',
+                         controller: _passwordController,
+                         validator: (value) {
+                           if (value?.isEmpty ?? true) {
+                             return 'Please enter a password';
+                           }
+                           if (!RegExp(
+                               r'^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}|":;<>,.?/~`]).{8,}$')
+                               .hasMatch(value!)) {
+                             return 'Password must have at least 8 characters, an uppercase letter, a digit, and a special character';
+                           }
+                           return null;
+                         },
+                         isPassword: true,
+                         showPassword: _showPassword,
+                         onToggleShowPassword: () {
+                           setState(() {
+                             _showPassword = !_showPassword;
+                           });
+                         },
+                       ),
+                       SizedBox(height: 30),
+                       Center(
+                         child: ElevatedButton(
+                           onPressed: _registerUser,
+                           style: ElevatedButton.styleFrom(
+                             primary: Colors.black,
+                           ),
+                           child: Text(
+                             'Sign Up',
+                             style: TextStyle(
+                               color: Colors.white,
+                               fontSize: 18,
+                               fontWeight: FontWeight.bold,
+                             ),
+                           ),
+                         ),
+                       ),
+                       SizedBox(height: 10),
+                       Row(
+
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: <Widget>[
+                           Text("Already have an account? ",
+                             style: TextStyle(
+                               color: Colors.white
+                             ),
+                           ),
+                           InkWell(
+                             onTap: () {
+                               // Navigate to the sign-in page
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => SignInPage(),
+                                 ),
+                               );
+                             },
+                             child: Text(
+                               "Log In",
+                               style: TextStyle(
+                                 fontSize: 18,
+                                 color: Colors.white,
+                                 fontWeight: FontWeight.bold,
+                               ),
+                             ),
+                           ),
+                         ],
+                       ),
+                     ],
+                   ),
+                 )
                 ],
               ),
             ),
